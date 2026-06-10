@@ -1,6 +1,24 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+// Resolve a URL base da API.
+// Aceita tanto uma URL completa (ex.: https://host/api) quanto apenas o host
+// (ex.: agenda-backend.onrender.com), normalizando para https://host/api.
+// Isso permite que o render.yaml injete o host do backend via `fromService`.
+function resolveApiUrl() {
+  const raw = process.env.REACT_APP_API_URL;
+  if (!raw) return 'http://localhost:8080/api';
+  let url = raw.trim();
+  if (!/^https?:\/\//i.test(url)) {
+    url = `https://${url}`;
+  }
+  url = url.replace(/\/+$/, '');
+  if (!/\/api$/i.test(url)) {
+    url = `${url}/api`;
+  }
+  return url;
+}
+
+const API_URL = resolveApiUrl();
 
 const api = axios.create({
   baseURL: API_URL,
