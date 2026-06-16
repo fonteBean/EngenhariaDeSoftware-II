@@ -9,7 +9,7 @@ services:
     environment:
       - DB_HOST=postgres
       - DB_PORT=5432
-      - DB_NAME=agenda_db
+      - DB_NAME=saude_db
       - DB_USER=postgres
       - DB_PASSWORD=postgres
     depends_on:
@@ -28,7 +28,7 @@ services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_DB: agenda_db
+      POSTGRES_DB: saude_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
