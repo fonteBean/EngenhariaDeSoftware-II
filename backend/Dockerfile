@@ -6,6 +6,7 @@ RUN mvn dependency:go-offline -B
 COPY src ./src
 RUN mvn package -DskipTests -B
 
+
 # ======= RUNTIME STAGE =======
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
